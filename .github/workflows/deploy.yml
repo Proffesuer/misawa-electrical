@@ -1,4 +1,3 @@
-cat > .github/workflows/deploy.yml << 'EOF'
 name: Deploy to FTP
 
 on:
@@ -36,4 +35,3 @@ jobs:
           server-dir: /home/sxobikcs/public_html/
           dangerous-clean-slate: false
           log-level: minimal
-EOF
