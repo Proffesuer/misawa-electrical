@@ -34,9 +34,9 @@ import boq    from "../assets/images/BOQ(1).png";    // BOQ document
 
 // ── DATA ─────────────────────────────
 const heroSlides = [
-  { img: img10,  eyebrow: "Powering Mombasa & Beyond",   title: "Electrical Solutions",    accent: "You Can Trust",  sub: "Professional electrical installations, CCTV, solar, and security systems delivered by certified engineers across Kenya." },
-  { img: ctrl,   eyebrow: "Complete Security Systems",   title: "See Every Corner,",       accent: "Stay Protected", sub: "End-to-end CCTV design, supply, and installation — from residential homes to large commercial control rooms." },
-  { img: img3,   eyebrow: "Clean Energy for Kenya",      title: "Solar Power",             accent: "Built to Last",  sub: "Off-grid and hybrid solar solutions designed for Kenyan conditions, reducing your energy bills from day one." },
+  { img: img6,  eyebrow: "Powering Mombasa & Beyond",   title: "Electrical Solutions",    accent: "You Can Trust",  sub: "Professional electrical installations, CCTV, solar, and security systems delivered by certified engineers across Kenya." },
+  { img: img7,  eyebrow: "Complete Security Systems",   title: "See Every Corner,",       accent: "Stay Protected", sub: "End-to-end CCTV design, supply, and installation — from residential homes to large commercial control rooms." },
+  { img: img8,  eyebrow: "Clean Energy for Kenya",      title: "Solar Power",             accent: "Built to Last",  sub: "Off-grid and hybrid solar solutions designed for Kenyan conditions, reducing your energy bills from day one." },
 ];
 
 const tickerItems = [
