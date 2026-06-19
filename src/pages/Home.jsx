@@ -1,5 +1,6 @@
 import "./Home.css";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { MdEmail, MdPhone, MdLocationOn, MdBolt, MdSecurity,
          MdSolarPower, MdFence, MdBuild, MdDesignServices, MdInterpreterMode,
          MdVerifiedUser, MdSchedule, MdFactCheck, MdReceiptLong,
@@ -50,7 +51,6 @@ const tickerItems = [
 ];
 
 const services = [
-  // img assignments carefully matched to actual image content
   { icon: <MdDesignServices />, title: "Electrical Drawings & BQ",      img: design, desc: "Detailed electrical layout drawings and Bills of Quantities for residential, commercial, and industrial projects — prepared to Kenya Power standards.", bullets: ["AutoCAD layout plans","Accurate cost estimates","Regulatory compliance"] },
   { icon: <MdSecurity />,       title: "CCTV Installation",             img: cctv,   desc: "Full-scope CCTV system design, supply, and commissioning. We cover IP cameras, DVR/NVR setups, remote viewing, and 24/7 monitoring integration.", bullets: ["IP & analog cameras","Remote mobile access","Night vision & PTZ"] },
   { icon: <MdInterpreterMode />,title: "Intercoms & Access Control",    img: srvs,   desc: "Video and audio intercom systems for secure, seamless entry management — ideal for apartments, offices, schools, and gated compounds.", bullets: ["Video door phones","Gate automation","Multi-unit systems"] },
@@ -134,8 +134,8 @@ function Hero() {
         </h1>
         <p className="hero__sub">{heroSlides[active].sub}</p>
         <div className="hero__actions">
-          <a href="#services" className="btn btn--gold">Our Services</a>
-          <a href="#contact"  className="btn btn--outline">Get a Free Quote</a>
+          <Link to="/services" className="btn btn--gold">Our Services</Link>
+          <Link to="/contact" className="btn btn--outline">Get a Free Quote</Link>
         </div>
       </div>
       <div className="hero__dots">
@@ -198,7 +198,7 @@ function AboutStrip() {
             <div className="about-strip__badge"><strong>10+</strong><span>Years</span></div>
             <div className="about-strip__badge"><strong>200+</strong><span>Clients</span></div>
           </div>
-          <a href="/about" className="btn btn--navy">Learn More About Us</a>
+          <Link to="/about" className="btn btn--navy">Learn More About Us</Link>
         </div>
         <div className="about-strip__grid">
           <img src={img9}   alt="Panel rows"        className="about-strip__pic about-strip__pic--tall" />
@@ -220,16 +220,19 @@ function Services() {
       <div className="services__scroll-wrap">
         <div className="services__scroll-track">
           {[...services, ...services].map((s, i) => (
-            <a href="#contact" className="svc-tile" key={i}>
+            <Link to="/services" className="svc-tile" key={i}>
               <img src={s.img} alt={s.title} className="svc-tile__img" />
               <div className="svc-tile__grad" />
               <div className="svc-tile__bottom">
                 <span className="svc-tile__icon">{s.icon}</span>
                 <span className="svc-tile__title">{s.title}</span>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
+      </div>
+      <div className="services__cta">
+        <Link to="/services" className="btn btn--navy">Explore All Services</Link>
       </div>
     </section>
   );
@@ -243,7 +246,6 @@ function CctvStrip() {
     <section className="cctv-strip">
       <div className="container cctv-strip__inner">
 
-        {/* Left — single large hero image */}
         <div className="cctv-strip__visual">
           <img src={ctrl} alt="CCTV Control Room" className="cctv-strip__main-img" />
           <div className="cctv-strip__img-badge">
@@ -252,7 +254,6 @@ function CctvStrip() {
           </div>
         </div>
 
-        {/* Right — text + small 2-col grid */}
         <div className="cctv-strip__text">
           <p className="cctv-strip__eyebrow">Security You Can See</p>
           <h2 className="cctv-strip__title">Full CCTV &amp; Access Control Solutions</h2>
@@ -281,7 +282,10 @@ function CctvStrip() {
             <img src={cctv1} alt="Camera mount" />
           </div>
 
-          <a href="#contact" className="btn btn--navy">Get a CCTV Quote</a>
+          <div className="cctv-strip__actions">
+            <Link to="/contact" className="btn btn--navy">Get a CCTV Quote</Link>
+            <Link to="/services" className="btn btn--outline">See All Security Services</Link>
+          </div>
         </div>
 
       </div>
@@ -315,8 +319,8 @@ function VideoHero() {
           and CCTV pairing — protecting homes, farms, and businesses across Kenya.
         </p>
         <div className="vid-hero__actions">
-          <a href="#contact" className="btn btn--gold">Get a Fencing Quote</a>
-          <a href="/services" className="btn btn--outline">All Our Services</a>
+          <Link to="/contact" className="btn btn--gold">Get a Fencing Quote</Link>
+          <Link to="/services" className="btn btn--outline">All Our Services</Link>
         </div>
       </div>
     </section>
@@ -363,7 +367,7 @@ function Gallery() {
           ))}
         </div>
         <div className="gallery__cta">
-          <a href="/projects" className="btn btn--navy">View All Projects</a>
+          <Link to="/projects" className="btn btn--navy">View All Projects</Link>
         </div>
       </div>
       {lightbox !== null && (
@@ -399,7 +403,10 @@ function InfraStrip() {
             <li>UPS and power protection</li>
             <li>Data centre fit-out</li>
           </ul>
-          <a href="#contact" className="btn btn--gold">Request a Quote</a>
+          <div className="infra-strip__actions">
+            <Link to="/contact" className="btn btn--gold">Request a Quote</Link>
+            <Link to="/services" className="btn btn--outline">View All Services</Link>
+          </div>
         </div>
         <div className="infra-strip__images">
           <img src={srv}  alt="Server room"  className="infra-strip__img infra-strip__img--main" />
@@ -419,7 +426,10 @@ function Contact() {
       <div className="container contact-section__inner">
         <div className="contact-section__left">
           <SectionHeader eyebrow="Get In Touch" title="Let's Work Together" centered={false} />
-          <p className="contact-section__sub">Request a free site assessment or quote. Our team responds within 24 hours.</p>
+          <p className="contact-section__sub">
+            Request a free site assessment or quote. Our team responds within 24 hours.{" "}
+            <Link to="/contact" className="contact-section__link">Visit our full contact page →</Link>
+          </p>
           <ul className="contact-section__list">
             <li><MdEmail className="contact-section__icon" /><a href="mailto:info@misawaelectricals.co.ke">info@misawaelectricals.co.ke</a></li>
             <li><MdPhone className="contact-section__icon" /><a href="tel:+254732062005">+254 732 062005</a><span className="contact-section__divider">/</span><a href="tel:+254724877573">+254 724 877573</a></li>
