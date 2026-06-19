@@ -1,4 +1,5 @@
 import "./Services.css";
+import { Link } from "react-router-dom";
 import { MdCheck, MdArrowForward, MdDesignServices, MdSecurity,
          MdInterpreterMode, MdBolt, MdSolarPower, MdFence, MdBuild } from "react-icons/md";
 
@@ -11,7 +12,7 @@ import img10  from "../assets/images/image10.jpeg";
 import cctv   from "../assets/images/cctv.jpeg";
 import srvs   from "../assets/images/server-setup.jpeg";
 import setup  from "../assets/images/setup.jpeg";
-import design from "../assets/images/design.jpeg";
+import design from "../assets/images/electrical-drawing.png";
 
 const services = [
   {
@@ -135,9 +136,9 @@ export default function ServicesPage() {
                     </li>
                   ))}
                 </ul>
-                <a href="/contact" className="svc-item__cta">
+                <Link to="/contact" className="svc-item__cta">
                   Request This Service <MdArrowForward />
-                </a>
+                </Link>
               </div>
             </div>
           ))}
@@ -155,7 +156,7 @@ export default function ServicesPage() {
             <h2 className="svc-cta__title">Not Sure What You Need?</h2>
             <p className="svc-cta__sub">Contact us for a free consultation and site assessment.</p>
           </div>
-          <a href="/contact" className="btn btn--gold">Talk to an Engineer</a>
+          <Link to="/contact" className="btn btn--gold">Talk to an Engineer</Link>
         </div>
       </section>
 
