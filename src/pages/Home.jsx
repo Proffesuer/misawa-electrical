@@ -28,7 +28,7 @@ import srv    from "../assets/images/server-room.jpeg";        // server room
 import srvs   from "../assets/images/server-setup.jpeg";       // server rack/intercom setup
 import setup  from "../assets/images/setup.jpeg";    // MCB/maintenance board
 import setup2 from "../assets/images/setup2.jpeg";   // outdoor installation
-import design from "../assets/images/design.jpeg";
+import design from "../assets/images/electrical-drawing.png";
 import fenceVid from "../assets/images/sample-video-of-security-digital-fence-work-we-do.mp4";
 import boq    from "../assets/images/BOQ(1).png";    // BOQ document
 
