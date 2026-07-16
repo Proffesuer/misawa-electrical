@@ -1,13 +1,7 @@
 import "./Contact.css";
-import { useState, useRef } from "react";
-import emailjs from "@emailjs/browser";
+import { useState } from "react";
 import { MdEmail, MdPhone, MdLocationOn, MdAccessTime, MdCheckCircle, MdError } from "react-icons/md";
 import SectionHeader from "../components/SectionHeader";
-
-// ── Replace these with your EmailJS dashboard values ──
-const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
 
 const contactInfo = [
   { icon: <MdEmail />,      title: "Email Us",      lines: ["info@misawaelectricals.co.ke"],                    link: "mailto:info@misawaelectricals.co.ke" },
@@ -16,10 +10,9 @@ const contactInfo = [
   { icon: <MdAccessTime />, title: "Working Hours",  lines: ["Mon – Fri: 8:00am – 6:00pm", "Sat: 9:00am – 2:00pm"] },
 ];
 
-const INITIAL = { name: "", phone: "", email: "", subject: "", service: "", message: "" };
+const INITIAL = { name: "", phone: "", email: "", subject: "", service: "", message: "", botcheck: "" };
 
 export default function Contact() {
-  const formRef             = useRef();
   const [form, setForm]     = useState(INITIAL);
   const [status, setStatus] = useState(null); // null | "loading" | "success" | "error"
   const [errMsg, setErrMsg] = useState("");
@@ -33,14 +26,20 @@ export default function Contact() {
     setErrMsg("");
 
     try {
-      await emailjs.sendForm(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        EMAILJS_PUBLIC_KEY
-      );
-      setStatus("success");
-      setForm(INITIAL);
+      const res = await fetch("/send.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus("success");
+        setForm(INITIAL);
+      } else {
+        setStatus("error");
+        setErrMsg(data.message || "Failed to send. Please call us or email info@misawaelectricals.co.ke");
+      }
     } catch (err) {
       console.error(err);
       setStatus("error");
@@ -106,8 +105,18 @@ export default function Contact() {
               </div>
             )}
 
-            {/* input name= must match your EmailJS template variables */}
-            <form ref={formRef} className="contact-form-full" onSubmit={handleSubmit}>
+            <form className="contact-form-full" onSubmit={handleSubmit}>
+              {/* Honeypot — hidden from humans, bots fill it and get dropped */}
+              <input
+                type="text"
+                name="botcheck"
+                value={form.botcheck}
+                onChange={handleChange}
+                style={{ display: "none" }}
+                tabIndex="-1"
+                autoComplete="off"
+              />
+
               <div className="contact-form-full__row">
                 <div className="cfull__group">
                   <label htmlFor="name">Full Name *</label>
