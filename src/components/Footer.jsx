@@ -97,7 +97,7 @@ export default function Footer() {
           </p>
           <p className="footer__credit">
             Designed &amp; Built by{" "}
-            <a href="https://xiracom.com" target="_blank" rel="noreferrer" className="footer__credit-link">
+            <a href="https://xiracom.co.ke" target="_blank" rel="noreferrer" className="footer__credit-link">
               Xiracom Limited
             </a>
           </p>
