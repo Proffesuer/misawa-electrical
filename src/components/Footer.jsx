@@ -1,5 +1,5 @@
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
-import logo from "../assets/images/logo.jpeg";
+import logo from "../assets/images/logo-transparent.png";
 
 const services = [
   "Electrical Drawings & BQ",

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../assets/images/logo.jpeg";
+import logo from "../assets/images/logo-transparent.png";
 
 const navLinks = [
   { label: "Home",     to: "/"         },
@@ -13,16 +13,39 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden]     = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", onScroll);
+    let lastY = window.scrollY;
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      const threshold = window.innerHeight * 0.5; // 50% of the viewport
+
+      setScrolled(y > 50);
+
+      if (menuOpen) {
+        setHidden(false);            // never hide while mobile menu is open
+      } else if (y > lastY && y > threshold) {
+        setHidden(true);             // scrolling DOWN past 50% → hide
+      } else if (y < lastY) {
+        setHidden(false);            // scrolling UP → show
+      }
+
+      lastY = y;
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [menuOpen]);
 
   return (
-    <nav className={`navbar${scrolled ? " navbar--scrolled" : ""}`}>
+    <nav
+      className={`navbar${scrolled ? " navbar--scrolled" : ""}${
+        hidden ? " navbar--hidden" : ""
+      }`}
+    >
       <div className="navbar__inner">
 
         {/* Logo */}
