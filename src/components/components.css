@@ -245,14 +245,24 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 /* Footer sits on dark navy, so the dark-text logo keeps a white backing here */
 .footer__logo {
-  height: 60px;
+  height: 120px;
   width: auto;
   object-fit: contain;
-  margin-bottom: 1rem;
-  background: var(--white);
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--radius);
   display: inline-block;
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.5rem;
+  background: var(--white);
+  /* Gentle feather so the navy background blends softly into the badge edges */
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent 0%, #000 4%, #000 96%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  -webkit-mask-repeat: no-repeat;
+  mask-image:
+    linear-gradient(to right,  transparent 0%, #000 4%, #000 96%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  mask-composite: intersect;
+  mask-repeat: no-repeat;
 }
 .footer__tagline { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.8; text-align: left; max-width: 260px; }
 .footer__col-title {
