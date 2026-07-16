@@ -21,6 +21,47 @@
 .contact-card__line { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; display: block; transition: color var(--transition); }
 a.contact-card__line:hover { color: var(--red); }
 
+/* ── FEEDBACK TOAST (floating, auto-dismiss) ── */
+.cfull__feedback {
+  position: fixed;
+  top: 90px;               /* sits just below the navbar */
+  right: 24px;
+  z-index: 1200;
+  max-width: 360px;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: 12px;
+  animation: cfull-toast-in 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+.cfull__feedback svg { flex-shrink: 0; font-size: 1.6rem; margin-top: 2px; }
+.cfull__feedback strong { display: block; font-size: 1.02rem; margin-bottom: 0.15rem; }
+.cfull__feedback p { margin: 0; font-size: 0.9rem; line-height: 1.5; }
+
+/* Green success */
+.cfull__feedback--success {
+  background: linear-gradient(135deg, #e9f9ef 0%, #d6f5e0 100%);
+  border: 1px solid #34c759;
+  color: #14663a;
+  box-shadow: 0 12px 34px rgba(52, 199, 89, 0.3);
+}
+.cfull__feedback--success svg { color: #22a04b; }
+
+/* Red error (same toast style) */
+.cfull__feedback--error {
+  background: linear-gradient(135deg, #fdeaea 0%, #fbdada 100%);
+  border: 1px solid #e8212a;
+  color: #8f1116;
+  box-shadow: 0 12px 34px rgba(232, 33, 42, 0.25);
+}
+.cfull__feedback--error svg { color: #d11a22; }
+
+@keyframes cfull-toast-in {
+  0%   { opacity: 0; transform: translateX(40px) scale(0.96); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+
 /* ── CONTACT MAIN ── */
 .contact-main { padding: 5rem 0; background: var(--white); }
 .contact-main__inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
@@ -58,4 +99,6 @@ a.contact-card__line:hover { color: var(--red); }
   .contact-cards__grid { grid-template-columns: 1fr; }
   .contact-form-full__row { grid-template-columns: 1fr; }
   .about-cta__inner { flex-direction: column; text-align: center; }
+  /* Toast stretches across the top on phones */
+  .cfull__feedback { top: 76px; right: 12px; left: 12px; max-width: none; }
 }
